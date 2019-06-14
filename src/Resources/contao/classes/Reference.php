@@ -76,7 +76,7 @@ class Reference extends \System
         }
 
         // add rented status token, if this was not added by the core
-        if(in_array('rented', $tokens) && $this->objRealEstate->verkaufstatus !== 'vermietet' && $realEstate->objRealEstate->referenz && ($this->objRealEstate->vermarktungsartMietePacht || $this->objRealEstate->vermarktungsartLeasing))
+        if(in_array('rented', $tokens) && !$this->objRealEstate->vermietet && $realEstate->objRealEstate->referenz && ($this->objRealEstate->vermarktungsartMietePacht || $this->objRealEstate->vermarktungsartLeasing))
         {
             $arrTokens[] = array(
                 'value' => Translator::translateValue('rented'),
