@@ -28,7 +28,7 @@ class Reference extends \System
      * @param $mode
      * @param $context
      */
-    public function setFilterParameter(&$arrColumns, &$arrValues, &$arrOptions, $mode, $context)
+    public function setFilterParameter(&$arrColumns, &$arrValues, &$arrOptions, $mode, $addFragments, $context)
     {
         if($mode === 'reference')
         {
