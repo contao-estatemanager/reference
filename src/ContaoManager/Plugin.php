@@ -27,8 +27,8 @@ class Plugin implements BundlePluginInterface
     {
         return [
             BundleConfig::create(EstateManagerReference::class)
-                ->setLoadAfter([ContaoCoreBundle::class])
-                ->setReplace(['estatemanagerreference']),
+                ->setLoadAfter([ContaoCoreBundle::class, EstateManager::class])
+                ->setReplace(['estatemanager-reference']),
         ];
     }
 }
