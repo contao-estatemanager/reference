@@ -12,7 +12,7 @@ namespace ContaoEstateManager\Reference;
 
 use ContaoEstateManager\Translator;
 
-class Reference extends \System
+class Reference extends \Controller
 {
     /**
      * Table
@@ -58,7 +58,7 @@ class Reference extends \System
         }
 
         // add reference status token
-        if (in_array('reference', $tokens) && $realEstate->objRealEstate->referenz)
+        if (in_array('reference', $tokens) && $realEstate->referenz)
         {
             $arrTokens[] = array(
                 'value' => Translator::translateValue('reference'),
@@ -67,7 +67,7 @@ class Reference extends \System
         }
 
         // add sold status token, if this was not added by the core
-        if (in_array('sold', $tokens) && $this->objRealEstate->verkaufstatus !== 'verkauft' && $realEstate->objRealEstate->referenz && ($realEstate->objRealEstate->vermarktungsartKauf || $realEstate->objRealEstate->vermarktungsartErbpacht))
+        if (in_array('sold', $tokens) && $realEstate->verkaufstatus !== 'verkauft' && $realEstate->referenz && ($realEstate->vermarktungsartKauf || $realEstate->vermarktungsartErbpacht))
         {
             $arrTokens[] = array(
                 'value' => Translator::translateValue('sold'),
@@ -76,7 +76,7 @@ class Reference extends \System
         }
 
         // add rented status token, if this was not added by the core
-        if(in_array('rented', $tokens) && !$this->objRealEstate->vermietet && $realEstate->objRealEstate->referenz && ($this->objRealEstate->vermarktungsartMietePacht || $this->objRealEstate->vermarktungsartLeasing))
+        if(in_array('rented', $tokens) && !$realEstate->vermietet && $realEstate->referenz && ($realEstate->vermarktungsartMietePacht || $realEstate->vermarktungsartLeasing))
         {
             $arrTokens[] = array(
                 'value' => Translator::translateValue('rented'),
@@ -87,6 +87,28 @@ class Reference extends \System
         if(count($arrTokens))
         {
             $objTemplate->arrStatusTokens = array_merge($objTemplate->arrStatusTokens, $arrTokens);
+        }
+    }
+
+    /**
+     * Add status token for reference objects
+     *
+     * @param array           $arrMainDetails
+     * @param RealEstateModel $objRealEstate
+     * @param integer         $max
+     * @param mixed           $context
+     */
+    public function removeReferenceMainDetails(&$arrMainDetails, $objRealEstate, &$max, $context)
+    {
+        if ($objRealEstate->referenz)
+        {
+            foreach ($arrMainDetails as $i => $mainDetail)
+            {
+                if ($GLOBALS['TL_DCA']['tl_real_estate']['fields'][$mainDetail['field']]['realEstate']['price'])
+                {
+                    unset($arrMainDetails[$i]);
+                }
+            }
         }
     }
 }

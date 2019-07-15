@@ -13,10 +13,10 @@ $GLOBALS['TL_ESTATEMANAGER_ADDONS'][] = array('ContaoEstateManager\\Reference', 
 
 if(ContaoEstateManager\Reference\AddonManager::valid()) {
     // HOOKS
-    $GLOBALS['TL_HOOKS']['getTypeParameter'][] = array('ContaoEstateManager\\Reference\\Reference', 'setFilterParameter');
-    $GLOBALS['TL_HOOKS']['getParameterByGroups'][] = array('ContaoEstateManager\\Reference\\Reference', 'setFilterParameter');
+    $GLOBALS['TL_HOOKS']['getTypeParameter'][]         = array('ContaoEstateManager\\Reference\\Reference', 'setFilterParameter');
+    $GLOBALS['TL_HOOKS']['getParameterByGroups'][]     = array('ContaoEstateManager\\Reference\\Reference', 'setFilterParameter');
     $GLOBALS['TL_HOOKS']['getTypeParameterByGroups'][] = array('ContaoEstateManager\\Reference\\Reference', 'setFilterParameter');
-
-    $GLOBALS['TL_HOOKS']['parseRealEstate'][] = array('ContaoEstateManager\\Reference\\Reference', 'addStatusToken');
+    $GLOBALS['TL_HOOKS']['parseRealEstate'][]          = array('ContaoEstateManager\\Reference\\Reference', 'addStatusToken');
     $GLOBALS['TL_HOOKS']['compileExposeStatusToken'][] = array('ContaoEstateManager\\Reference\\Reference', 'addStatusToken');
+    $GLOBALS['TL_HOOKS']['getMainDetails'][]           = array('ContaoEstateManager\\Reference\\Reference', 'removeReferenceMainDetails');
 }
