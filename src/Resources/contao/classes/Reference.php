@@ -41,6 +41,25 @@ class Reference extends \System
     }
 
     /**
+     * Set reference filter parameters for similar objects
+     * @param $arrColumns
+     * @param $arrValues
+     * @param $arrOptions
+     * @param $realEstate
+     */
+    public function setSimilarFilterParameter(&$arrColumns, &$arrValues, &$arrOptions, $realEstate)
+    {
+        if($realEstate->referenz)
+        {
+            $arrColumns[] = "$this->strTable.referenz=1";
+        }
+        else
+        {
+            $arrColumns[] = "$this->strTable.referenz=0";
+        }
+    }
+
+    /**
      * Add status token for reference objects
      *
      * @param $objTemplate
