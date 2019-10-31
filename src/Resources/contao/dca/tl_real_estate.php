@@ -62,7 +62,7 @@ class tl_real_estate_reference extends Backend
         }
 
         // add reference information
-        $args[2] .= '<span style="color:#7f5200;display:block;margin-top: 5px">Referenz</span>';
+        $args[0] .= '<span class="token" style="background-color:#ef634c; color:#fff;" title="Referenz">R</span>';
 
         return $args;
     }
