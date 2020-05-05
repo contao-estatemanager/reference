@@ -10,9 +10,11 @@
 
 namespace ContaoEstateManager\Reference;
 
+use Contao\Controller;
+use Contao\StringUtil;
 use ContaoEstateManager\Translator;
 
-class Reference extends \Controller
+class Reference extends Controller
 {
     /**
      * Table
@@ -68,7 +70,7 @@ class Reference extends \Controller
      */
     public function addStatusToken(&$objTemplate, $realEstate, $context)
     {
-        $tokens = \StringUtil::deserialize($context->statusTokens);
+        $tokens = StringUtil::deserialize($context->statusTokens);
         $arrTokens = array();
 
         if(!$tokens)
