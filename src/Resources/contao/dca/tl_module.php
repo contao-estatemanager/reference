@@ -10,8 +10,8 @@
 
 if(ContaoEstateManager\Reference\AddonManager::valid()) {
     // Extend estate manager filterMode field options
-    array_insert($GLOBALS['TL_DCA']['tl_module']['fields']['filterMode']['options'], 1, array('reference'));
+    $GLOBALS['TL_DCA']['tl_module']['fields']['filterMode']['options'][] = 'reference';
 
     // Extend estate manager statusTokens field options
-    array_insert($GLOBALS['TL_DCA']['tl_module']['fields']['statusTokens']['options'], -1, array('reference'));
+    $GLOBALS['TL_DCA']['tl_module']['fields']['statusTokens']['options'][] = 'reference';
 }

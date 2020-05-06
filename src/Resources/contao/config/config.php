@@ -12,7 +12,7 @@
 $GLOBALS['TL_ESTATEMANAGER_ADDONS'][] = array('ContaoEstateManager\\Reference', 'AddonManager');
 
 if(ContaoEstateManager\Reference\AddonManager::valid()) {
-    // HOOKS
+    // Hooks
     $GLOBALS['TL_HOOKS']['getTypeParameter'][]         = array('ContaoEstateManager\\Reference\\Reference', 'setFilterParameter');
     $GLOBALS['TL_HOOKS']['getParameterByGroups'][]     = array('ContaoEstateManager\\Reference\\Reference', 'setFilterParameter');
     $GLOBALS['TL_HOOKS']['getTypeParameterByGroups'][] = array('ContaoEstateManager\\Reference\\Reference', 'setFilterParameter');

@@ -28,9 +28,11 @@ class Reference extends Controller
      * @param $arrValues
      * @param $arrOptions
      * @param $mode
+     * @param $addFragments
+     * @param $objModule
      * @param $context
      */
-    public function setFilterParameter(&$arrColumns, &$arrValues, &$arrOptions, $mode, $addFragments, $objModule, $context)
+    public function setFilterParameter(&$arrColumns, &$arrValues, &$arrOptions, $mode, $addFragments, $objModule, $context): void
     {
         if($mode === 'reference')
         {
@@ -49,7 +51,7 @@ class Reference extends Controller
      * @param $arrOptions
      * @param $realEstate
      */
-    public function setSimilarFilterParameter(&$arrColumns, &$arrValues, &$arrOptions, $realEstate)
+    public function setSimilarFilterParameter(&$arrColumns, &$arrValues, &$arrOptions, $realEstate): void
     {
         if($realEstate->referenz)
         {
@@ -68,7 +70,7 @@ class Reference extends Controller
      * @param $realEstate
      * @param $context
      */
-    public function addStatusToken(&$objTemplate, $realEstate, $context)
+    public function addStatusToken(&$objTemplate, $realEstate, $context): void
     {
         $tokens = StringUtil::deserialize($context->statusTokens);
         $arrTokens = array();
@@ -119,7 +121,7 @@ class Reference extends Controller
      * @param integer         $max
      * @param mixed           $context
      */
-    public function removeReferenceMainDetails(&$arrMainDetails, $objRealEstate, &$max, $context)
+    public function removeReferenceMainDetails(&$arrMainDetails, $objRealEstate, &$max, $context): void
     {
         if ($objRealEstate->referenz)
         {

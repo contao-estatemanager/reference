@@ -32,6 +32,7 @@ if(ContaoEstateManager\Reference\AddonManager::valid()) {
  * Provide miscellaneous methods that are used by the data configuration array.
  *
  * @author Fabian Ekert <fabian@oveleon.de>
+ * @author Daniele Sciannimanica <https://github.com/doishub>
  */
 class tl_real_estate_reference extends Backend
 {
@@ -62,7 +63,7 @@ class tl_real_estate_reference extends Backend
         }
 
         // add reference information
-        $args[0] .= '<span class="token" style="background-color:#ef634c; color:#fff;" title="Referenz">R</span>';
+        $args[0] .= '<span class="token" style="background-color:#ef634c; color:#fff;" title="Reference">R</span>';
 
         return $args;
     }
