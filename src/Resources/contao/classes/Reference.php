@@ -34,6 +34,10 @@ class Reference extends \Controller
         {
             $arrColumns[] = "$this->strTable.referenz=1";
         }
+        else if ($mode === 'appendReference')
+        {
+            $arrOptions['order'] = "$this->strTable.referenz" . ($arrOptions['order'] ? ', ' . $arrOptions['order'] : '');
+        }
         else
         {
             $arrColumns[] = "$this->strTable.referenz=0";
@@ -110,7 +114,7 @@ class Reference extends \Controller
     }
 
     /**
-     * Add status token for reference objects
+     * Remove main details for reference objects
      *
      * @param array           $arrMainDetails
      * @param RealEstateModel $objRealEstate
