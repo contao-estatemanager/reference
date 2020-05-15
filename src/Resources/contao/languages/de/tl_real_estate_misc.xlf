@@ -3,8 +3,12 @@
   <file datatype="php" original="src/Resources/contao/languages/en/tl_real_estate_misc.php" source-language="en" target-language="de">
     <body>
       <trans-unit id="tl_real_estate_misc.reference">
-        <source>Reference</source>
-        <target>Referenz</target>
+        <source>References</source>
+        <target>Referenzen</target>
+      </trans-unit>
+      <trans-unit id="tl_real_estate_misc.appendReference">
+        <source>Append references</source>
+        <target>Referenzen anhängen</target>
       </trans-unit>
     </body>
   </file>
