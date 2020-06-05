@@ -66,50 +66,37 @@ class Reference extends Controller
     /**
      * Add status token for reference objects
      *
-     * @param $objTemplate
-     * @param $realEstate
+     * @param $validStatusToken
+     * @param $arrStatusTokens
      * @param $context
      */
-    public function addStatusToken(&$objTemplate, $realEstate, $context): void
+    public function addStatusToken($validStatusToken, &$arrStatusTokens, $context): void
     {
-        $tokens = StringUtil::deserialize($context->statusTokens);
-        $arrTokens = array();
-
-        if(!$tokens)
-        {
-            return;
-        }
-
         // add reference status token
-        if (in_array('reference', $tokens) && $realEstate->referenz)
+        if (in_array('reference', $validStatusToken) && $context->objRealEstate->referenz)
         {
-            $arrTokens[] = array(
+            $arrStatusTokens[] = array(
                 'value' => Translator::translateValue('reference'),
                 'class' => 'reference'
             );
         }
 
         // add sold status token, if this was not added by the core
-        if (in_array('sold', $tokens) && $realEstate->verkaufstatus !== 'verkauft' && $realEstate->referenz && ($realEstate->vermarktungsartKauf || $realEstate->vermarktungsartErbpacht))
+        if (in_array('sold', $validStatusToken) && $context->objRealEstate->verkaufstatus !== 'verkauft' && $context->objRealEstate->referenz && ($context->objRealEstate->vermarktungsartKauf || $context->objRealEstate->vermarktungsartErbpacht))
         {
-            $arrTokens[] = array(
+            $arrStatusTokens[] = array(
                 'value' => Translator::translateValue('sold'),
                 'class' => 'sold'
             );
         }
 
         // add rented status token, if this was not added by the core
-        if(in_array('rented', $tokens) && !$realEstate->vermietet && $realEstate->referenz && ($realEstate->vermarktungsartMietePacht || $realEstate->vermarktungsartLeasing))
+        if(in_array('rented', $validStatusToken) && !$context->objRealEstate->vermietet && $context->objRealEstate->referenz && ($context->objRealEstate->vermarktungsartMietePacht || $context->objRealEstate->vermarktungsartLeasing))
         {
-            $arrTokens[] = array(
+            $arrStatusTokens[] = array(
                 'value' => Translator::translateValue('rented'),
                 'class' => 'rented'
             );
-        }
-
-        if(count($arrTokens))
-        {
-            $objTemplate->arrStatusTokens = array_merge($objTemplate->arrStatusTokens, $arrTokens);
         }
     }
 
