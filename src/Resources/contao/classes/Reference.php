@@ -12,6 +12,7 @@ namespace ContaoEstateManager\Reference;
 
 use Contao\Controller;
 use Contao\StringUtil;
+use ContaoEstateManager\RealEstateModel;
 use ContaoEstateManager\Translator;
 
 class Reference extends Controller
@@ -37,6 +38,10 @@ class Reference extends Controller
         if($mode === 'reference')
         {
             $arrColumns[] = "$this->strTable.referenz=1";
+        }
+        else if ($mode === 'appendReference')
+        {
+            $arrOptions['order'] = "$this->strTable.referenz" . ($arrOptions['order'] ? ', ' . $arrOptions['order'] : '');
         }
         else
         {
@@ -101,7 +106,7 @@ class Reference extends Controller
     }
 
     /**
-     * Add status token for reference objects
+     * Remove main datails for reference objects
      *
      * @param array           $arrMainDetails
      * @param RealEstateModel $objRealEstate

@@ -9,6 +9,8 @@
  */
 
 if(ContaoEstateManager\Reference\AddonManager::valid()) {
+    $GLOBALS['TL_DCA']['tl_real_estate']['config']['onsubmit_callback'][] = array('tl_real_estate_reference', 'setReferenceField');
+
     $GLOBALS['TL_DCA']['tl_real_estate']['list']['label']['post_label_callbacks'][] = array('tl_real_estate_reference', 'addReferenceInformation');
 
     // Add field
@@ -46,16 +48,64 @@ class tl_real_estate_reference extends Backend
     }
 
     /**
+     * Set the reference field if needed
+     *
+     * @param Contao\DataContainer $dc
+     */
+    public function setReferenceField(Contao\DataContainer $dc)
+    {
+        // Return if there is no active record
+        if (!$dc->activeRecord)
+        {
+            return;
+        }
+
+        if ($dc->activeRecord->referenz)
+        {
+            return;
+        }
+
+        $reference = false;
+
+        $arrIndicator = Contao\StringUtil::deserialize(Contao\Config::get('referenceIndicatorFields'));
+
+        foreach ($arrIndicator as $indicator)
+        {
+            switch ($indicator)
+            {
+                case 'sold':
+                    if ($dc->activeRecord->verkaufstatus === 'verkauft')
+                    {
+                        $reference = true;
+                    }
+                    break;
+                case 'rented':
+                    if ($dc->activeRecord->vermietet)
+                    {
+                        $reference = true;
+                    }
+                    break;
+                case 'unpublished':
+                    if ($dc->activeRecord->published == '' || $dc->activeRecord->published == '0')
+                    {
+                        $reference = true;
+                    }
+                    break;
+            }
+        }
+    }
+
+    /**
      * Add reference flag
      *
-     * @param array         $row
-     * @param string        $label
-     * @param DataContainer $dc
-     * @param array         $args
+     * @param array                $row
+     * @param string               $label
+     * @param Contao\DataContainer $dc
+     * @param array                $args
      *
      * @return array
      */
-    public function addReferenceInformation($row, $label, DataContainer $dc, $args)
+    public function addReferenceInformation($row, $label, Contao\DataContainer $dc, $args)
     {
         if (!$row['referenz'])
         {

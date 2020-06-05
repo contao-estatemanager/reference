@@ -11,6 +11,7 @@
 if(ContaoEstateManager\Reference\AddonManager::valid()) {
     // Extend estate manager filterMode field options
     $GLOBALS['TL_DCA']['tl_module']['fields']['filterMode']['options'][] = 'reference';
+    $GLOBALS['TL_DCA']['tl_module']['fields']['filterMode']['options'][] = 'appendReference';
 
     // Extend estate manager statusTokens field options
     $GLOBALS['TL_DCA']['tl_module']['fields']['statusTokens']['options'][] = 'reference';
