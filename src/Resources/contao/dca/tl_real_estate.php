@@ -35,6 +35,7 @@ if(ContaoEstateManager\Reference\AddonManager::valid()) {
  * Provide miscellaneous methods that are used by the data configuration array.
  *
  * @author Fabian Ekert <fabian@oveleon.de>
+ * @author Daniele Sciannimanica <https://github.com/doishub>
  */
 class tl_real_estate_reference extends Backend
 {
@@ -50,9 +51,9 @@ class tl_real_estate_reference extends Backend
     /**
      * Set the reference field if needed
      *
-     * @param \DataContainer $dc
+     * @param Contao\DataContainer $dc
      */
-    public function setReferenceField(\DataContainer $dc)
+    public function setReferenceField(Contao\DataContainer $dc)
     {
         // Return if there is no active record
         if (!$dc->activeRecord)
@@ -67,7 +68,7 @@ class tl_real_estate_reference extends Backend
 
         $reference = false;
 
-        $arrIndicator = \StringUtil::deserialize(\Config::get('referenceIndicatorFields'));
+        $arrIndicator = Contao\StringUtil::deserialize(Contao\Config::get('referenceIndicatorFields'));
 
         foreach ($arrIndicator as $indicator)
         {
@@ -98,14 +99,14 @@ class tl_real_estate_reference extends Backend
     /**
      * Add reference flag
      *
-     * @param array         $row
-     * @param string        $label
-     * @param DataContainer $dc
-     * @param array         $args
+     * @param array                $row
+     * @param string               $label
+     * @param Contao\DataContainer $dc
+     * @param array                $args
      *
      * @return array
      */
-    public function addReferenceInformation($row, $label, DataContainer $dc, $args)
+    public function addReferenceInformation($row, $label, Contao\DataContainer $dc, $args)
     {
         if (!$row['referenz'])
         {
@@ -113,7 +114,7 @@ class tl_real_estate_reference extends Backend
         }
 
         // add reference information
-        $args[0] .= '<span class="token" style="background-color:#ef634c; color:#fff;" title="Referenz">R</span>';
+        $args[0] .= '<span class="token" style="background-color:#ef634c; color:#fff;" title="Reference">R</span>';
 
         return $args;
     }

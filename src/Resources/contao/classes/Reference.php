@@ -10,9 +10,12 @@
 
 namespace ContaoEstateManager\Reference;
 
+use Contao\Controller;
+use Contao\StringUtil;
+use ContaoEstateManager\RealEstateModel;
 use ContaoEstateManager\Translator;
 
-class Reference extends \Controller
+class Reference extends Controller
 {
     /**
      * Table
@@ -26,9 +29,11 @@ class Reference extends \Controller
      * @param $arrValues
      * @param $arrOptions
      * @param $mode
+     * @param $addFragments
+     * @param $objModule
      * @param $context
      */
-    public function setFilterParameter(&$arrColumns, &$arrValues, &$arrOptions, $mode, $addFragments, $objModule, $context)
+    public function setFilterParameter(&$arrColumns, &$arrValues, &$arrOptions, $mode, $addFragments, $objModule, $context): void
     {
         if($mode === 'reference')
         {
@@ -51,7 +56,7 @@ class Reference extends \Controller
      * @param $arrOptions
      * @param $realEstate
      */
-    public function setSimilarFilterParameter(&$arrColumns, &$arrValues, &$arrOptions, $realEstate)
+    public function setSimilarFilterParameter(&$arrColumns, &$arrValues, &$arrOptions, $realEstate): void
     {
         if($realEstate->referenz)
         {
@@ -66,62 +71,49 @@ class Reference extends \Controller
     /**
      * Add status token for reference objects
      *
-     * @param $objTemplate
-     * @param $realEstate
+     * @param $validStatusToken
+     * @param $arrStatusTokens
      * @param $context
      */
-    public function addStatusToken(&$objTemplate, $realEstate, $context)
+    public function addStatusToken($validStatusToken, &$arrStatusTokens, $context): void
     {
-        $tokens = \StringUtil::deserialize($context->statusTokens);
-        $arrTokens = array();
-
-        if(!$tokens)
-        {
-            return;
-        }
-
         // add reference status token
-        if (in_array('reference', $tokens) && $realEstate->referenz)
+        if (in_array('reference', $validStatusToken) && $context->objRealEstate->referenz)
         {
-            $arrTokens[] = array(
+            $arrStatusTokens[] = array(
                 'value' => Translator::translateValue('reference'),
                 'class' => 'reference'
             );
         }
 
         // add sold status token, if this was not added by the core
-        if (in_array('sold', $tokens) && $realEstate->verkaufstatus !== 'verkauft' && $realEstate->referenz && ($realEstate->vermarktungsartKauf || $realEstate->vermarktungsartErbpacht))
+        if (in_array('sold', $validStatusToken) && $context->objRealEstate->verkaufstatus !== 'verkauft' && $context->objRealEstate->referenz && ($context->objRealEstate->vermarktungsartKauf || $context->objRealEstate->vermarktungsartErbpacht))
         {
-            $arrTokens[] = array(
+            $arrStatusTokens[] = array(
                 'value' => Translator::translateValue('sold'),
                 'class' => 'sold'
             );
         }
 
         // add rented status token, if this was not added by the core
-        if(in_array('rented', $tokens) && !$realEstate->vermietet && $realEstate->referenz && ($realEstate->vermarktungsartMietePacht || $realEstate->vermarktungsartLeasing))
+        if(in_array('rented', $validStatusToken) && !$context->objRealEstate->vermietet && $context->objRealEstate->referenz && ($context->objRealEstate->vermarktungsartMietePacht || $context->objRealEstate->vermarktungsartLeasing))
         {
-            $arrTokens[] = array(
+            $arrStatusTokens[] = array(
                 'value' => Translator::translateValue('rented'),
                 'class' => 'rented'
             );
         }
-
-        if(count($arrTokens))
-        {
-            $objTemplate->arrStatusTokens = array_merge($objTemplate->arrStatusTokens, $arrTokens);
-        }
     }
 
     /**
-     * Remove main details for reference objects
+     * Remove main datails for reference objects
      *
      * @param array           $arrMainDetails
      * @param RealEstateModel $objRealEstate
      * @param integer         $max
      * @param mixed           $context
      */
-    public function removeReferenceMainDetails(&$arrMainDetails, $objRealEstate, &$max, $context)
+    public function removeReferenceMainDetails(&$arrMainDetails, $objRealEstate, &$max, $context): void
     {
         if ($objRealEstate->referenz)
         {
