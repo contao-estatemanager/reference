@@ -28,6 +28,7 @@ if(ContaoEstateManager\Reference\AddonManager::valid()) {
         ->addField(array('referenz'), 'vermietet', Contao\CoreBundle\DataContainer\PaletteManipulator::POSITION_AFTER)
         ->applyToPalette('default', 'tl_real_estate')
     ;
+
 }
 
 /**
