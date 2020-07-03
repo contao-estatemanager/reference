@@ -5,12 +5,6 @@
             <trans-unit id="tl_real_estate_config.reference_legend">
                 <source>Referenzen</source>
             </trans-unit>
-            <trans-unit id="tl_real_estate_config.referenceIndicatorFields.0">
-                <source>Reference indicator</source>
-            </trans-unit>
-            <trans-unit id="tl_real_estate_config.referenceIndicatorFields.1">
-                <source>Here you can define indicators on the basis of which a property should be considered as a reference property.</source>
-            </trans-unit>
             <trans-unit id="tl_real_estate_config.sold">
                 <source>Sold</source>
             </trans-unit>
