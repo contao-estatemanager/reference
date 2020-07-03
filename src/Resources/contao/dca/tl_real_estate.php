@@ -9,8 +9,6 @@
  */
 
 if(ContaoEstateManager\Reference\AddonManager::valid()) {
-    $GLOBALS['TL_DCA']['tl_real_estate']['config']['onsubmit_callback'][] = array('tl_real_estate_reference', 'setReferenceField');
-
     $GLOBALS['TL_DCA']['tl_real_estate']['list']['label']['post_label_callbacks'][] = array('tl_real_estate_reference', 'addReferenceInformation');
 
     // Add field
@@ -46,54 +44,6 @@ class tl_real_estate_reference extends Backend
     {
         parent::__construct();
         $this->import('BackendUser', 'User');
-    }
-
-    /**
-     * Set the reference field if needed
-     *
-     * @param Contao\DataContainer $dc
-     */
-    public function setReferenceField(Contao\DataContainer $dc)
-    {
-        // Return if there is no active record
-        if (!$dc->activeRecord)
-        {
-            return;
-        }
-
-        if ($dc->activeRecord->referenz)
-        {
-            return;
-        }
-
-        $reference = false;
-
-        $arrIndicator = Contao\StringUtil::deserialize(Contao\Config::get('referenceIndicatorFields'));
-
-        foreach ($arrIndicator as $indicator)
-        {
-            switch ($indicator)
-            {
-                case 'sold':
-                    if ($dc->activeRecord->verkaufstatus === 'verkauft')
-                    {
-                        $reference = true;
-                    }
-                    break;
-                case 'rented':
-                    if ($dc->activeRecord->vermietet)
-                    {
-                        $reference = true;
-                    }
-                    break;
-                case 'unpublished':
-                    if ($dc->activeRecord->published == '' || $dc->activeRecord->published == '0')
-                    {
-                        $reference = true;
-                    }
-                    break;
-            }
-        }
     }
 
     /**

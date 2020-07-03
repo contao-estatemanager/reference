@@ -6,14 +6,6 @@
                 <source>Referenzen</source>
                 <target>References</target>
             </trans-unit>
-            <trans-unit id="tl_real_estate_config.referenceIndicatorFields.0">
-                <source>Reference indicator</source>
-                <target>Referenz-Indikator</target>
-            </trans-unit>
-            <trans-unit id="tl_real_estate_config.referenceIndicatorFields.1">
-                <source>Here you can define indicators on the basis of which a property should be considered as a reference property.</source>
-                <target>Hier können Sie Indikatoren definieren, anhand welcher eine Immobilie als Referenz-Immobilie angesehen werden soll.</target>
-            </trans-unit>
             <trans-unit id="tl_real_estate_config.sold">
                 <source>Sold</source>
                 <target>Verkauft</target>
