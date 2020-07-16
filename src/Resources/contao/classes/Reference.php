@@ -143,4 +143,20 @@ class Reference extends Controller
             throw new PageNotFoundException('Page not found: ' . Environment::get('uri'));
         }
     }
+
+    /**
+     * Check if delete real estate records is allowed
+     *
+     * @param $objRealEstate
+     * @param $objProvider
+     * @param $preventDelete
+     * @param $context
+     */
+    public function realEstateImportDeleteRecord($objRealEstate, $objProvider, &$preventDelete, $context)
+    {
+        if ($context->interface->dontDeleteRecords && $objRealEstate->referenz == '1')
+        {
+            $preventDelete = true;
+        }
+    }
 }
