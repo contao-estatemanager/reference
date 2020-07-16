@@ -11,6 +11,8 @@
 namespace ContaoEstateManager\Reference;
 
 use Contao\Controller;
+use Contao\CoreBundle\Exception\PageNotFoundException;
+use Contao\Environment;
 use Contao\StringUtil;
 use ContaoEstateManager\RealEstateModel;
 use ContaoEstateManager\Translator;
@@ -124,6 +126,21 @@ class Reference extends Controller
                     unset($arrMainDetails[$i]);
                 }
             }
+        }
+    }
+
+    /**
+     * Check if expose module is allowed to display reference records
+     *
+     * @param $objTemplate
+     * @param $objRealEstate
+     * @param $context
+     */
+    public function compileRealEstateExpose($objTemplate, $objRealEstate, $context)
+    {
+        if ($objRealEstate->referenz && !$context->allowReferences)
+        {
+            throw new PageNotFoundException('Page not found: ' . Environment::get('uri'));
         }
     }
 }

@@ -17,6 +17,7 @@ if(ContaoEstateManager\Reference\AddonManager::valid()) {
     $GLOBALS['TL_HOOKS']['getParameterByGroups'][]     = array('ContaoEstateManager\Reference\Reference', 'setFilterParameter');
     $GLOBALS['TL_HOOKS']['getTypeParameterByGroups'][] = array('ContaoEstateManager\Reference\Reference', 'setFilterParameter');
     $GLOBALS['TL_HOOKS']['getSimilarFilterOptions'][]  = array('ContaoEstateManager\Reference\Reference', 'setSimilarFilterParameter');
+    $GLOBALS['TL_HOOKS']['compileRealEstateExpose'][]  = array('ContaoEstateManager\Reference\Reference', 'compileRealEstateExpose');
 
     $GLOBALS['TL_HOOKS']['getStatusTokens'][]          = array('ContaoEstateManager\Reference\Reference', 'addStatusToken');
     $GLOBALS['TL_HOOKS']['getMainDetails'][]           = array('ContaoEstateManager\Reference\Reference', 'removeReferenceMainDetails');
