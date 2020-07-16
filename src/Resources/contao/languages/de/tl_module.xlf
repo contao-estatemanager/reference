@@ -1,0 +1,14 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="src/Resources/contao/languages/en/tl_module.php" source-language="en" target-language="de">
+    <body>
+      <trans-unit id="tl_module.allowReferences.0">
+        <source>Allow references</source>
+        <target>Referenzen erlauben</target>
+      </trans-unit>
+      <trans-unit id="tl_module.allowReferences.1">
+        <source>Here you can specify whether references are can be called via the exposé.</source>
+        <target>Hier können Sie angeben, ob Referenzen über das Exposé aufrufbar sind.</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
