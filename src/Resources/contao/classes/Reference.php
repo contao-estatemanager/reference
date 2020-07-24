@@ -154,7 +154,7 @@ class Reference extends Controller
      */
     public function realEstateImportDeleteRecord($objRealEstate, $objProvider, &$preventDelete, $context)
     {
-        if ($context->interface->dontDeleteRecords && $objRealEstate->referenz == '1')
+        if ($context->interface->dontDeleteReferences && $objRealEstate->referenz == '1')
         {
             $preventDelete = true;
         }
