@@ -9,6 +9,22 @@
  */
 
 if(ContaoEstateManager\Reference\AddonManager::valid()) {
+    // Add field
+    $GLOBALS['TL_DCA']['tl_module']['fields']['allowReferences'] = array
+    (
+        'label'                   => &$GLOBALS['TL_LANG']['tl_module']['allowReferences'],
+        'exclude'                 => true,
+        'inputType'               => 'checkbox',
+        'eval'                    => array('tl_class'=>'w50'),
+        'sql'                     => "char(1) NOT NULL default ''"
+    );
+
+    // Extend the default palettes
+    Contao\CoreBundle\DataContainer\PaletteManipulator::create()
+        ->addField(array('allowReferences'), 'allowUnpublishedRecords', Contao\CoreBundle\DataContainer\PaletteManipulator::POSITION_AFTER)
+        ->applyToPalette('realEstateExpose', 'tl_module')
+    ;
+
     // Extend estate manager filterMode field options
     $GLOBALS['TL_DCA']['tl_module']['fields']['filterMode']['options'][] = 'reference';
     $GLOBALS['TL_DCA']['tl_module']['fields']['filterMode']['options'][] = 'appendReference';

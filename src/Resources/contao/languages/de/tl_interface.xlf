@@ -1,0 +1,14 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="src/Resources/contao/languages/en/tl_interface.php" source-language="en" target-language="de">
+    <body>
+      <trans-unit id="tl_interface.dontDeleteReferences.0">
+        <source>Do not delete references</source>
+        <target>Referenzen nicht löschen</target>
+      </trans-unit>
+      <trans-unit id="tl_interface.dontDeleteReferences.1">
+        <source>Here you can specify whether references may be deleted by the interface.</source>
+        <target>Hier können Sie angeben, ob Referenzen durch die Schnittstelle gelöscht werden dürfen.</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
