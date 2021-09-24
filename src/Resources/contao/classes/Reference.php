@@ -80,7 +80,7 @@ class Reference extends Controller
     public function addStatusToken($validStatusToken, &$arrStatusTokens, $context): void
     {
         // add reference status token
-        if (in_array('reference', $validStatusToken) && $context->objRealEstate->referenz)
+        if (\in_array('reference', $validStatusToken) && $context->objRealEstate->referenz)
         {
             $arrStatusTokens[] = array(
                 'value' => Translator::translateValue('reference'),
@@ -89,7 +89,7 @@ class Reference extends Controller
         }
 
         // add sold status token, if this was not added by the core
-        if (in_array('sold', $validStatusToken) && $context->objRealEstate->verkaufstatus !== 'verkauft' && $context->objRealEstate->referenz && ($context->objRealEstate->vermarktungsartKauf || $context->objRealEstate->vermarktungsartErbpacht))
+        if (\in_array('sold', $validStatusToken) && $context->objRealEstate->verkaufstatus !== 'verkauft' && $context->objRealEstate->referenz && ($context->objRealEstate->vermarktungsartKauf || $context->objRealEstate->vermarktungsartErbpacht))
         {
             $arrStatusTokens[] = array(
                 'value' => Translator::translateValue('sold'),
@@ -98,7 +98,7 @@ class Reference extends Controller
         }
 
         // add rented status token, if this was not added by the core
-        if(in_array('rented', $validStatusToken) && !$context->objRealEstate->vermietet && $context->objRealEstate->referenz && ($context->objRealEstate->vermarktungsartMietePacht || $context->objRealEstate->vermarktungsartLeasing))
+        if(\in_array('rented', $validStatusToken) && !$context->objRealEstate->vermietet && $context->objRealEstate->referenz && ($context->objRealEstate->vermarktungsartMietePacht || $context->objRealEstate->vermarktungsartLeasing))
         {
             $arrStatusTokens[] = array(
                 'value' => Translator::translateValue('rented'),
@@ -121,7 +121,7 @@ class Reference extends Controller
         {
             foreach ($arrMainDetails as $i => $mainDetail)
             {
-                if ($GLOBALS['TL_DCA']['tl_real_estate']['fields'][$mainDetail['field']]['realEstate']['price'])
+                if ($GLOBALS['TL_DCA']['tl_real_estate']['fields'][$mainDetail['field']]['realEstate']['price'] ?? null)
                 {
                     unset($arrMainDetails[$i]);
                 }

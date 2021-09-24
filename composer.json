@@ -23,7 +23,8 @@
     "contao-estatemanager/core": "^1.0"
   },
   "require-dev": {
-    "contao/manager-plugin": "^2.0"
+    "contao/manager-plugin": "^2.0",
+    "contao/easy-coding-standard": "^3.4"
   },
   "conflict": {
     "contao/core": "*",
