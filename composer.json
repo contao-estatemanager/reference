@@ -49,5 +49,10 @@
       "dev-master": "1.0.x-dev"
     },
     "contao-manager-plugin": "ContaoEstateManager\\Reference\\ContaoManager\\Plugin"
+  },
+  "scripts": {
+    "cs-fixer": [
+      "vendor/bin/ecs check src/ --fix --ansi"
+    ]
   }
 }
