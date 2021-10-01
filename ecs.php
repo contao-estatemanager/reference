@@ -6,12 +6,16 @@ use PhpCsFixer\Fixer\Basic\BracesFixer;
 use PhpCsFixer\Fixer\Comment\HeaderCommentFixer;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symplify\EasyCodingStandard\ValueObject\Option;
+use SlevomatCodingStandard\Sniffs\TypeHints\DisallowArrayTypeHintSyntaxSniff;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
     $containerConfigurator->import(__DIR__.'/vendor/contao/easy-coding-standard/config/set/contao.php');
 
     $parameters = $containerConfigurator->parameters();
     $parameters->set(Option::LINE_ENDING, "\n");
+    $parameters->set(Option::SKIP, [
+        DisallowArrayTypeHintSyntaxSniff::class => null,
+    ]);
 
     $services = $containerConfigurator->services();
     $services
