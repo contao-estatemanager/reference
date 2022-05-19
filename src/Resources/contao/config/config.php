@@ -12,6 +12,7 @@ declare(strict_types=1);
  */
 
 use ContaoEstateManager\Reference\AddonManager;
+use ContaoEstateManager\Reference\Reference;
 
 // ESTATEMANAGER
 $GLOBALS['TL_ESTATEMANAGER_ADDONS'][] = ['ContaoEstateManager\Reference', 'AddonManager'];
@@ -19,14 +20,14 @@ $GLOBALS['TL_ESTATEMANAGER_ADDONS'][] = ['ContaoEstateManager\Reference', 'Addon
 if (AddonManager::valid())
 {
     // Hooks
-    $GLOBALS['TL_HOOKS']['getTypeParameter'][] = ['ContaoEstateManager\Reference\Reference', 'setFilterParameter'];
-    $GLOBALS['TL_HOOKS']['getParameterByGroups'][] = ['ContaoEstateManager\Reference\Reference', 'setFilterParameter'];
-    $GLOBALS['TL_HOOKS']['getParameterByTypes'][] = ['ContaoEstateManager\Reference\Reference', 'setFilterParameter'];
-    $GLOBALS['TL_HOOKS']['getTypeParameterByGroups'][] = ['ContaoEstateManager\Reference\Reference', 'setFilterParameter'];
-    $GLOBALS['TL_HOOKS']['getSimilarFilterOptions'][] = ['ContaoEstateManager\Reference\Reference', 'setSimilarFilterParameter'];
-    $GLOBALS['TL_HOOKS']['compileRealEstateExpose'][] = ['ContaoEstateManager\Reference\Reference', 'compileRealEstateExpose'];
-    $GLOBALS['TL_HOOKS']['realEstateImportDeleteRecord'][] = ['ContaoEstateManager\Reference\Reference', 'realEstateImportDeleteRecord'];
+    $GLOBALS['CEM_HOOKS']['getTypeParameter'][] = [Reference::class, 'setFilterParameter'];
+    $GLOBALS['CEM_HOOKS']['getParameterByGroups'][] = [Reference::class, 'setFilterParameter'];
+    $GLOBALS['CEM_HOOKS']['getParameterByTypes'][] = [Reference::class, 'setFilterParameter'];
+    $GLOBALS['CEM_HOOKS']['getTypeParameterByGroups'][] = [Reference::class, 'setFilterParameter'];
+    $GLOBALS['CEM_HOOKS']['getSimilarFilterOptions'][] = [Reference::class, 'setSimilarFilterParameter'];
+    $GLOBALS['CEM_HOOKS']['compileRealEstateExpose'][] = [Reference::class, 'compileRealEstateExpose'];
+    $GLOBALS['CEM_HOOKS']['realEstateImportDeleteRecord'][] = [Reference::class, 'realEstateImportDeleteRecord'];
 
-    $GLOBALS['TL_HOOKS']['getStatusTokens'][] = ['ContaoEstateManager\Reference\Reference', 'addStatusToken'];
-    $GLOBALS['TL_HOOKS']['getMainDetails'][] = ['ContaoEstateManager\Reference\Reference', 'removeReferenceMainDetails'];
+    $GLOBALS['CEM_HOOKS']['getStatusTokens'][] = [Reference::class, 'addStatusToken'];
+    $GLOBALS['CEM_HOOKS']['getMainDetails'][] = [Reference::class, 'removeReferenceMainDetails'];
 }
