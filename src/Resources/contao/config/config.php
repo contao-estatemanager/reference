@@ -20,14 +20,14 @@ $GLOBALS['TL_ESTATEMANAGER_ADDONS'][] = ['ContaoEstateManager\Reference', 'Addon
 if (AddonManager::valid())
 {
     // Hooks
-    $GLOBALS['CEM_HOOKS']['getTypeParameter'][] = [Reference::class, 'setFilterParameter'];
-    $GLOBALS['CEM_HOOKS']['getParameterByGroups'][] = [Reference::class, 'setFilterParameter'];
-    $GLOBALS['CEM_HOOKS']['getParameterByTypes'][] = [Reference::class, 'setFilterParameter'];
-    $GLOBALS['CEM_HOOKS']['getTypeParameterByGroups'][] = [Reference::class, 'setFilterParameter'];
-    $GLOBALS['CEM_HOOKS']['getSimilarFilterOptions'][] = [Reference::class, 'setSimilarFilterParameter'];
-    $GLOBALS['CEM_HOOKS']['compileRealEstateExpose'][] = [Reference::class, 'compileRealEstateExpose'];
-    $GLOBALS['CEM_HOOKS']['realEstateImportDeleteRecord'][] = [Reference::class, 'realEstateImportDeleteRecord'];
+    $GLOBALS['TL_HOOKS']['getTypeParameter'][] = [Reference::class, 'setFilterParameter'];
+    $GLOBALS['TL_HOOKS']['getParameterByGroups'][] = [Reference::class, 'setFilterParameter'];
+    $GLOBALS['TL_HOOKS']['getParameterByTypes'][] = [Reference::class, 'setFilterParameter'];
+    $GLOBALS['TL_HOOKS']['getTypeParameterByGroups'][] = [Reference::class, 'setFilterParameter'];
+    $GLOBALS['TL_HOOKS']['getSimilarFilterOptions'][] = [Reference::class, 'setSimilarFilterParameter'];
+    $GLOBALS['TL_HOOKS']['compileRealEstateExpose'][] = [Reference::class, 'compileRealEstateExpose'];
+    $GLOBALS['TL_HOOKS']['realEstateImportDeleteRecord'][] = [Reference::class, 'realEstateImportDeleteRecord'];
 
-    $GLOBALS['CEM_HOOKS']['getStatusTokens'][] = [Reference::class, 'addStatusToken'];
-    $GLOBALS['CEM_HOOKS']['getMainDetails'][] = [Reference::class, 'removeReferenceMainDetails'];
+    $GLOBALS['TL_HOOKS']['getStatusTokens'][] = [Reference::class, 'addStatusToken'];
+    $GLOBALS['TL_HOOKS']['getMainDetails'][] = [Reference::class, 'removeReferenceMainDetails'];
 }
