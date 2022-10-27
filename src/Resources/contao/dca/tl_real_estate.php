@@ -1,32 +1,38 @@
 <?php
-/**
+
+declare(strict_types=1);
+
+/*
  * This file is part of Contao EstateManager.
  *
- * @link      https://www.contao-estatemanager.com/
- * @source    https://github.com/contao-estatemanager/reference
- * @copyright Copyright (c) 2019  Oveleon GbR (https://www.oveleon.de)
- * @license   https://www.contao-estatemanager.com/lizenzbedingungen.html
+ * @see        https://www.contao-estatemanager.com/
+ * @source     https://github.com/contao-estatemanager/reference
+ * @copyright  Copyright (c) 2021 Oveleon GbR (https://www.oveleon.de)
+ * @license    https://www.contao-estatemanager.com/lizenzbedingungen.html
  */
 
-if(ContaoEstateManager\Reference\AddonManager::valid()) {
-    $GLOBALS['TL_DCA']['tl_real_estate']['list']['label']['post_label_callbacks'][] = array('tl_real_estate_reference', 'addReferenceInformation');
+use Contao\CoreBundle\DataContainer\PaletteManipulator;
+use Contao\DataContainer;
+use ContaoEstateManager\Reference\AddonManager;
+
+if (AddonManager::valid())
+{
+    $GLOBALS['TL_DCA']['tl_real_estate']['list']['label']['post_label_callbacks'][] = ['tl_real_estate_reference', 'addReferenceInformation'];
 
     // Add field
-    $GLOBALS['TL_DCA']['tl_real_estate']['fields']['referenz'] = array
-    (
-        'label'                     => &$GLOBALS['TL_LANG']['tl_real_estate']['referenz'],
-        'inputType'                 => 'checkbox',
-        'filter'                    => true,
-        'eval'                      => array('tl_class' => 'w50 m12'),
-        'sql'                       => "char(1) NOT NULL default '0'",
-    );
+    $GLOBALS['TL_DCA']['tl_real_estate']['fields']['referenz'] = [
+        'label' => &$GLOBALS['TL_LANG']['tl_real_estate']['referenz'],
+        'inputType' => 'checkbox',
+        'filter' => true,
+        'eval' => ['tl_class' => 'w50 m12'],
+        'sql' => "char(1) NOT NULL default '0'",
+    ];
 
     // Extend the default palettes
-    Contao\CoreBundle\DataContainer\PaletteManipulator::create()
-        ->addField(array('referenz'), 'vermietet', Contao\CoreBundle\DataContainer\PaletteManipulator::POSITION_AFTER)
+    PaletteManipulator::create()
+        ->addField(['referenz'], 'vermietet', PaletteManipulator::POSITION_AFTER)
         ->applyToPalette('default', 'tl_real_estate')
     ;
-
 }
 
 /**
@@ -38,7 +44,7 @@ if(ContaoEstateManager\Reference\AddonManager::valid()) {
 class tl_real_estate_reference extends Backend
 {
     /**
-     * Import the back end user object
+     * Import the back end user object.
      */
     public function __construct()
     {
@@ -47,16 +53,15 @@ class tl_real_estate_reference extends Backend
     }
 
     /**
-     * Add reference flag
+     * Add reference flag.
      *
-     * @param array                $row
-     * @param string               $label
-     * @param Contao\DataContainer $dc
-     * @param array                $args
+     * @param array  $row
+     * @param string $label
+     * @param array  $args
      *
      * @return array
      */
-    public function addReferenceInformation($row, $label, Contao\DataContainer $dc, $args)
+    public function addReferenceInformation($row, $label, DataContainer $dc, $args)
     {
         if (!$row['referenz'])
         {
